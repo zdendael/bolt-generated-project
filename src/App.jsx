@@ -89,62 +89,66 @@ import React, { useEffect, useState } from 'react'
       }
 
       return (
-        <div className="min-h-screen bg-gray-100 p-8">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">CRM System</h1>
+        <div className="container">
+          <h1 className="my-4">CRM System</h1>
 
-            {/* Formulář pro přidání/úpravu */}
-            <div className="bg-white shadow-md rounded-lg p-6 mb-8">
-              <h2 className="text-xl font-semibold mb-4">{editId ? 'Edit User' : 'Add User'}</h2>
-              <div className="space-y-4">
+          {/* Formulář pro přidání/úpravu */}
+          <div className="card mb-4">
+            <div className="card-body">
+              <h2 className="card-title">{editId ? 'Edit User' : 'Add User'}</h2>
+              <div className="mb-3">
                 <input
                   type="text"
                   placeholder="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
+                  className="form-control"
                 />
+              </div>
+              <div className="mb-3">
                 <input
                   type="email"
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-lg"
+                  className="form-control"
                 />
-                <button
-                  onClick={editId ? editUser : addUser}
-                  className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 transition-colors"
-                >
-                  {editId ? 'Update User' : 'Add User'}
-                </button>
               </div>
+              <button
+                onClick={editId ? editUser : addUser}
+                className="btn btn-primary"
+              >
+                {editId ? 'Update User' : 'Add User'}
+              </button>
             </div>
+          </div>
 
-            {/* Tabulka uživatelů */}
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-              <table className="min-w-full">
-                <thead className="bg-gray-50">
+          {/* Tabulka uživatelů */}
+          <div className="card">
+            <div className="card-body">
+              <table className="table">
+                <thead>
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-200">
+                <tbody>
                   {users.map(user => (
-                    <tr key={user.id} className="hover:bg-gray-50 transition-colors">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{user.name}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    <tr key={user.id}>
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
+                      <td>
                         <button
                           onClick={() => startEdit(user)}
-                          className="text-blue-500 hover:text-blue-700 mr-2"
+                          className="btn btn-sm btn-primary me-2"
                         >
                           Edit
                         </button>
                         <button
                           onClick={() => deleteUser(user.id)}
-                          className="text-red-500 hover:text-red-700"
+                          className="btn btn-sm btn-danger"
                         >
                           Delete
                         </button>
