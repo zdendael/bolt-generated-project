@@ -21,7 +21,7 @@ import React, { useEffect, useState } from 'react'
         if (error) {
           console.error('Error fetching users:', error)
         } else {
-          setUsers(data)
+          setUsers(data || [])
         }
       }
 
@@ -41,7 +41,7 @@ import React, { useEffect, useState } from 'react'
         if (error) {
           console.error('Error adding user:', error)
         } else {
-          setUsers([...users, ...data])
+          setUsers([...users, ...(data || [])])
           setName('')
           setEmail('')
         }
@@ -59,7 +59,7 @@ import React, { useEffect, useState } from 'react'
 
         if (error) {
           console.error('Error updating user:', error)
-        } else {
+        } else if (data && data.length > 0) {
           setUsers(users.map(user => user.id === editId ? data[0] : user))
           setName('')
           setEmail('')
